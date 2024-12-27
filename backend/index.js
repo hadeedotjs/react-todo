@@ -1,12 +1,12 @@
 const express = require("express")
 const { createTodo, updateTodo } = require("./types")
-
+const { todoDb } = require("./db")
 const app = express()
 
 app.use(express.json())
 
 
-app.post("/todo", (req,res)=>{
+app.post("/todo", async (req,res)=>{
     const todoBody = req.body
     const parsedBody = createTodo.safeParse(todoBody)
     if(!parsedBody.success){
@@ -15,13 +15,25 @@ app.post("/todo", (req,res)=>{
         })
         return
     }
+    await todoDb.create({
+        title : todoBody.title,
+        description : todoBody.description,
+        completed: false
+    })
+
+    res.json({
+        msg: "todo created"
+    })
 })
 
-app.get("/todos", (req,res)=>{
-    //
+app.get("/todos", async (req,res)=>{
+    const allTodos = await todoDb.find({})
+    res.json({
+        todos: allTodos 
+    })
 })
 
-app.put("/mark", (req,res)=>{
+app.put("/mark", async (req,res)=>{
     const markTodo= req.body
     const parsedMark = updateTodo.safeParse(markTodo)
     if(!parsedMark.success){
@@ -30,7 +42,15 @@ app.put("/mark", (req,res)=>{
         })
         return
     }
-    
+
+    await todoDb.update({
+        _id: req.body.id
+    }, {completed: true})
+
+    res.json({
+        msg: "todo marked as done"
+    })
+
 })
 
 
