@@ -6,32 +6,32 @@ export function CreateTodo(){
     const [description, setDescription] = useState("")
     return(<div>
         <input type='text' placeholder='title' onChange={function (e){
-            const value = e.target.value
-            setTitle(value)
+            const titlee = e.target.value
+            setTitle(titlee)
         }}></input>
         
          <br/>
 
         <input type='text' placeholder='description' onChange={function (e){
-            const value = e.target.value
-            setDescription(value)}}></input> <br/>
+            const desc = e.target.value
+            setDescription(desc)}}></input> <br/>
 
         <button
         onClick={()=>{
-            fetch("http://localhost:3000/todos", {
+            fetch("http://localhost:3000/todo", {
                 method: "POST",
                 body: JSON.stringify({
                     title: title,
                     description : description
                 }),
                 headers:{
-                    "contentType" : "application/json"
-                }
+                    "content-Type" : "application/json"
+                }})
                 .then(async (res)=>{
                     const json = await res.json()
                     alert("todo added ")
                 })
-            })
+            
         }}> Add todo</button>
         </div>
     )
