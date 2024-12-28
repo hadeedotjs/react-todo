@@ -1,10 +1,11 @@
 const express = require("express")
 const { createTodo, updateTodo } = require("./types")
 const { todoDb } = require("./db")
+const cors = require("cors")
 const app = express()
 
 app.use(express.json())
-
+app.use(cors())
 
 app.post("/todo", async (req,res)=>{
     const todoBody = req.body
@@ -52,6 +53,5 @@ app.put("/mark", async (req,res)=>{
     })
 
 })
-
 
 app.listen(3000)

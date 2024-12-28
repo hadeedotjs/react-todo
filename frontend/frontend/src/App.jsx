@@ -5,18 +5,17 @@ import { Todos } from './components/Todos'
 // import './App.css'
 
 function App() {
-  
+  const [todos, setTodos] = useState([])
+
+  // fetch("https://localhost:3000/todos").then(async function (res){
+  //   const todosJson = await res.json()
+  //   setTodos(todosJson.todos)
+  // })
 
   return (
     <div>
       <CreateTodo></CreateTodo>
-      <Todos todos={
-        [{
-          title: "gym",
-          description: "go to gym",
-          completed: true
-        }]
-      }></Todos>
+      <Todos todos={todos}></Todos>
     </div>
   )
 }
