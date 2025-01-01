@@ -4,15 +4,16 @@ export function Todos({todos}) {
 
  return  <div>
    
-        {todos.map((todo)=>{
-            return <div>
-                <h1>{todo.title}</h1>
-                <h2>{todo.description}</h2>
-                <button onClick={()=>{
-                    setMark(true)
-                }}
-                >{!mark ? "mark as done"  :  "done"}</button>
+        {todos.map((todo, index) => (
+            <div key={index}>
+                <span>Title: &nbsp;  {todo.title} || </span>
+                &nbsp;&nbsp;&nbsp;
+                <span>Description: &nbsp; {todo.description}  ||</span>
+                &nbsp;&nbsp;&nbsp;
+                <button onClick={() => setMark(!mark)}>
+                    {!mark ? "mark as done" : "done"}
+                </button>
             </div>
-        })}
+        ))}
     </div>
 }

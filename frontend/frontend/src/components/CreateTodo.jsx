@@ -4,25 +4,30 @@ export function CreateTodo(){
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    let count = 1;
+
     return(<div>
-        <input type='text' placeholder='title' onChange={function (e){
+        Title
+        &nbsp;
+        <input style={{padding: "10px"}} type='text' placeholder='title' onChange={function (e){
             const titlee = e.target.value
             setTitle(titlee)
         }}></input>
-        
-         <br/>
-
-        <input type='text' placeholder='description' onChange={function (e){
+        &nbsp;
+        Description 
+        &nbsp;
+        <input style={{padding: "10px"}} type='text' placeholder='description' onChange={function (e){
             const desc = e.target.value
-            setDescription(desc)}}></input> <br/>
-
+            setDescription(desc)}}></input>
+&nbsp;
         <button
         onClick={()=>{
-            fetch("http://localhost:3000/todo", {
+            fetch("http://localhost:3001/todo", {
                 method: "POST",
                 body: JSON.stringify({
                     title: title,
-                    description : description
+                    description : description,
+                    id: count++
                 }),
                 headers:{
                     "content-Type" : "application/json"

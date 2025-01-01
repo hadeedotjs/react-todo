@@ -1,8 +1,8 @@
 const mongo = require("mongoose")
+require('dotenv').config();
+const { MONGO_URL: mongoUrl } = process.env;
 
-
-mongo.connect("mongodb+srv://hadi-rasool:Hsquare%401444@hadi-database.zo37f.mongodb.net/?retryWrites=true&w=majority&appName=hadi-database")
-
+mongo.connect(mongoUrl)
 
 const todoSchema = mongo.Schema({
     title: String,
